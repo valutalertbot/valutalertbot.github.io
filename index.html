@@ -3,156 +3,81 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Пользовательское соглашение | ValutBot</title>
+    <title>ValutBot - уведомления о курсах в Telegram</title>
     <style>
       body {
-        font-family: Arial, sans-serif;
-        line-height: 1.6;
-        max-width: 900px;
+        margin: 0;
+        font-family: system-ui, sans-serif;
+        background: #0f172a;
+        color: #fff;
+        text-align: center;
+      }
+      .container {
+        max-width: 800px;
         margin: 0 auto;
-        padding: 24px;
-        color: #222;
-        background: #fff;
+        padding: 64px 20px;
       }
-
       h1 {
-        font-size: 28px;
-        margin-bottom: 24px;
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
       }
-
-      h2 {
-        font-size: 20px;
-        margin: 24px 0 12px;
-      }
-
       p {
-        margin: 0 0 12px;
+        color: #cbd5e1;
+        line-height: 1.6;
       }
-
-      ul {
-        margin: 8px 0 12px 24px;
+      .btn {
+        display: inline-block;
+        margin-top: 24px;
+        padding: 14px 28px;
+        background: #38bdf8;
+        color: #0f172a;
+        text-decoration: none;
+        border-radius: 12px;
+        font-weight: 700;
+        transition: transform 0.3s ease;
       }
-
-      li {
-        margin-bottom: 6px;
+      .btn:hover {
+        transform: scale(1.05);
       }
-
-      .contact {
-        font-weight: 600;
+      .features {
+        margin-top: 48px;
+        display: grid;
+        gap: 16px;
+      }
+      .card {
+        background: rgba(255, 255, 255, 0.06);
+        padding: 20px;
+        border-radius: 16px;
+        transition: transform 0.3s ease;
+      }
+      .card:hover {
+        transform: translateY(-5px);
+      }
+      .logo {
+        background: #fff;
+        padding: 8px;
+        border-radius: 25%;
       }
     </style>
   </head>
   <body>
-    <h1>Пользовательское соглашение | ValutBot</h1>
+    <div class="container">
+      <img src="logo.png" alt="ValutBot Logo" width="120" class="logo" />
+      <h1>ValutBot</h1>
+      <p>
+        Следи за курсами валют и криптовалют прямо в Telegram и получай
+        уведомления, когда цена достигнет нужного уровня.
+      </p>
 
-    <section>
-      <h2>1. Описание сервиса</h2>
-      <p>
-        Бот является независимым проектом, разработанным физическим лицом, и
-        предоставляет функции отслеживания и уведомлений по курсам валют и
-        другим финансовым данным. Сервис находится в активной разработке,
-        поэтому его функции могут изменяться, добавляться или временно
-        отключаться без предварительного уведомления.
-      </p>
-    </section>
+      <a class="btn" href="https://t.me/ValutAlertBot?start=f_site"
+        >Открыть в Telegram</a
+      >
 
-    <section>
-      <h2>2. Использование данных</h2>
-      <p>
-        Для работы бота используются минимально необходимые данные вашего
-        Telegram-аккаунта:
-      </p>
-      <ul>
-        <li>Telegram ID (chat_id)</li>
-        <li>имя пользователя (username)</li>
-        <li>имя (full name, если доступно)</li>
-        <li>
-          настройки, создаваемые внутри бота (например, подписки на валюты и
-          уведомления)
-        </li>
-      </ul>
-      <p>
-        Эти данные используются исключительно для работы функций бота и не
-        передаются третьим лицам, за исключением сервисов, необходимых для
-        функционирования (например Telegram и внешние API).
-      </p>
-    </section>
-
-    <section>
-      <h2>3. Реферальная система</h2>
-      <p>
-        В боте может использоваться реферальная система. Если вы приглашаете
-        других пользователей или были приглашены, бот может отображать имя или
-        username в рамках работы этой системы.
-      </p>
-    </section>
-
-    <section>
-      <h2>4. Подписки и платежи</h2>
-      <p>
-        Платные функции могут предоставляться через Telegram Stars. Все платежи
-        обрабатываются через платформу Telegram. Разработчик не имеет доступа к
-        платёжным данным пользователей (например, банковским картам).
-      </p>
-      <p>
-        История платежей может сохраняться в системе бота для корректной работы
-        подписок.
-      </p>
-    </section>
-
-    <section>
-      <h2>5. Внешние источники данных</h2>
-      <p>
-        Бот может использовать сторонние API (например, биржи и финансовые
-        сервисы) для получения курсов валют и других данных.
-      </p>
-      <p>
-        Разработчик не гарантирует абсолютную точность или актуальность данных,
-        так как они зависят от работы внешних сервисов. Возможны задержки,
-        ошибки или временная недоступность информации.
-      </p>
-    </section>
-
-    <section>
-      <h2>6. Ограничение ответственности</h2>
-      <p>
-        Сервис предоставляется на условиях «как есть» (as is). Разработчик не
-        несёт ответственности за:
-      </p>
-      <ul>
-        <li>временные сбои или недоступность бота</li>
-        <li>задержки или ошибки уведомлений</li>
-        <li>некорректные данные от сторонних источников</li>
-        <li>действия платформы Telegram или внешних API</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>7. Удаление данных</h2>
-      <p>
-        Пользователь может в любой момент прекратить использование бота и
-        удалить свои данные с помощью команды:
-      </p>
-      <p><code>/delete_account</code></p>
-      <p>После удаления:</p>
-      <ul>
-        <li>аккаунт и настройки удаляются из базы данных</li>
-        <li>активные подписки отключаются</li>
-      </ul>
-      <p>
-        Некоторые технические данные могут сохраняться в обезличенном виде в
-        рамках необходимости работы сервиса, предотвращения злоупотреблений и
-        технического учёта.
-      </p>
-    </section>
-
-    <section>
-      <h2>8. Контакты</h2>
-      <p>
-        По вопросам работы бота, ошибок или удаления данных вы можете связаться
-        с автором:
-      </p>
-      <p class="contact">ValutAlertBot@gmail.com</p>
-    </section>
+      <div class="features">
+        <div class="card">🔔 Гибкие уведомления по курсу</div>
+        <div class="card">⭐ Premium с расширенными возможностями</div>
+        <div class="card">📈 Поддержка популярных валют и криптовалют</div>
+      </div>
+    </div>
   </body>
 </html>
