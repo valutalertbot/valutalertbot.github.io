@@ -2,82 +2,745 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ValutBot - уведомления о курсах в Telegram</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      ValutBot — уведомления о курсах валют и криптовалют в Telegram
+    </title>
+    <meta
+      name="description"
+      content="ValutBot — Telegram-бот для отслеживания курсов валют и криптовалют. Получайте уведомления при достижении нужного курса прямо в Telegram."
+    />
+    <meta
+      property="og:title"
+      content="ValutBot — Telegram-бот для курсов валют и криптовалют"
+    />
+    <meta
+      property="og:description"
+      content="Следите за курсами валют и криптовалют и получайте уведомления при достижении нужной цены."
+    />
+    <meta
+      property="og:image"
+      content="https://valutalertbot.github.io/logo.png"
+    />
+    <meta property="og:url" content="https://valutalertbot.github.io/" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="ValutBot — Telegram-бот для курсов валют и криптовалют"
+    />
+    <meta
+      name="twitter:description"
+      content="Следите за курсами валют и криптовалют и получайте уведомления при достижении нужной цены."
+    />
+    <meta
+      name="twitter:image"
+      content="https://valutalertbot.github.io/logo.png"
+    />
+    <link rel="canonical" href="https://valutalertbot.github.io/" />
+    <link rel="icon" href="favicon.png" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0f172a" />
+
+    <!-- 
+    Лендинг ValutBot с SEO-мета, JSON-LD и улучшенной структурой.
+    • Темная тема по умолчанию, авто-светлая + ручной переключатель.
+    • Hero: логотип, заголовок, CTA, демонстрация виджета.
+    • Раздел «Как это работает» (3 шага).
+    • Возможности бота в карточках.
+    • Сравнение Free vs Premium (таблица).
+    • Поддерживаемые валюты и криптовалюты (бейджи).
+    • Блок «Почему ValutBot» (Telegram, надежные источники, Premium).
+    • FAQ через <details>.
+    • Footer: Telegram, новости, Privacy Policy, Support.
+    • JSON-LD: SoftwareApplication, FAQPage, Organization.
+  -->
+
     <style>
-      body {
+      :root {
+        --bg: #f7f7f7;
+        --text: #111111;
+        --muted: #555555;
+        --accent: #38bdf8;
+        --card: rgba(0, 0, 0, 0.03);
+        --border: rgba(0, 0, 0, 0.1);
+      }
+      [data-theme="dark"] {
+        --bg: #0f172a;
+        --text: #ffffff;
+        --muted: #cbd5e1;
+        --accent: #38bdf8;
+        --card: rgba(255, 255, 255, 0.05);
+        --border: rgba(255, 255, 255, 0.08);
+      }
+      * {
         margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
         font-family: system-ui, sans-serif;
-        background: #0f172a;
-        color: #fff;
-        text-align: center;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.5;
       }
       .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 64px 20px;
+        width: 90%;
+        max-width: 1000px;
+        margin: auto;
+      }
+      header,
+      section,
+      footer {
+        width: 100%;
+      }
+      h2.section-title {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 2rem;
+      }
+
+      /* Header (Hero) */
+      header {
+        text-align: center;
+        padding: 80px 0 60px;
+        position: relative;
+      }
+      .logo {
+        width: 120px;
+        margin-bottom: 20px;
+        background: white;
+        border-radius: 24px;
+        display: inline-block;
       }
       h1 {
-        font-size: 3rem;
-        margin-bottom: 0.5rem;
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        margin-bottom: 16px;
       }
-      p {
-        color: #cbd5e1;
-        line-height: 1.6;
+      .subtitle {
+        max-width: 600px;
+        margin: 16px auto;
+        color: var(--muted);
+        font-size: 1.1rem;
       }
-      .btn {
+      .btn-cta {
         display: inline-block;
-        margin-top: 24px;
+        margin-top: 30px;
         padding: 14px 28px;
-        background: #38bdf8;
+        background: var(--accent);
         color: #0f172a;
         text-decoration: none;
         border-radius: 12px;
-        font-weight: 700;
-        transition: transform 0.3s ease;
+        font-weight: 600;
+        transition: transform 0.2s;
       }
-      .btn:hover {
-        transform: scale(1.05);
+      .btn-cta:hover {
+        transform: translateY(-2px);
+      }
+      .hero-currencies {
+        margin-top: 20px;
+        color: var(--muted);
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+      }
+      /* Demo widget */
+      .hero-demo {
+        margin-top: 40px;
+      }
+      .widget {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px;
+        max-width: 300px;
+        margin: 0 auto;
+        transition: opacity 0.5s;
+        position: relative;
+      }
+      .widget p {
+        margin: 10px 0;
+        font-size: 0.95rem;
+      }
+      .widget p.status {
+        font-weight: bold;
+      }
+      .widget.hidden {
+        opacity: 0;
+      }
+      /* How it works */
+      #how {
+        padding: 60px 0;
+      }
+      .steps {
+        display: grid;
+        gap: 20px;
+        margin-top: 30px;
+      }
+      .step {
+        text-align: center;
+        padding: 20px;
+      }
+      .step-number {
+        width: 40px;
+        height: 40px;
+        background: var(--accent);
+        color: #0f172a;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        margin: 0 auto 10px auto;
+      }
+      /* Features */
+      #features {
+        padding: 60px 0;
       }
       .features {
-        margin-top: 48px;
         display: grid;
-        gap: 16px;
+        gap: 20px;
       }
-      .card {
-        background: rgba(255, 255, 255, 0.06);
+      .features .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 24px;
+        transition: transform 0.3s;
+        text-align: center;
+      }
+      .features .card:hover {
+        transform: translateY(-4px);
+      }
+      .features .card h3 {
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+      }
+      .features .card p {
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+      /* Free vs Premium table */
+      #pricing {
+        padding: 60px 0;
+      }
+      table.compare {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px auto;
+      }
+      table.compare th,
+      table.compare td {
+        padding: 12px 8px;
+        border: 1px solid var(--border);
+      }
+      table.compare th {
+        background: var(--card);
+        font-size: 1rem;
+      }
+      table.compare td {
+        text-align: center;
+        font-size: 0.95rem;
+      }
+      /* Supported assets badges */
+      #supported {
+        padding: 60px 0;
+        text-align: center;
+      }
+      .badges {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .badge {
+        padding: 6px 12px;
+        border-radius: 12px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        color: var(--text);
+        font-size: 0.9rem;
+      }
+      /* Why ValutBot trust */
+      #why {
+        padding: 60px 0;
+      }
+      .trust {
+        display: grid;
+        gap: 20px;
+      }
+      .trust .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 18px;
         padding: 20px;
-        border-radius: 16px;
-        transition: transform 0.3s ease;
+        transition: transform 0.3s;
+        text-align: center;
       }
-      .card:hover {
-        transform: translateY(-5px);
+      .trust .card:hover {
+        transform: translateY(-4px);
       }
-      .logo {
-        background: #fff;
-        padding: 8px;
-        border-radius: 25%;
+      .trust .card h3 {
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+      }
+      .trust .card p {
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+      /* FAQ */
+      #faq {
+        padding: 60px 0;
+      }
+      #faq .section-title {
+        margin-bottom: 20px;
+      }
+      details {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 15px 18px;
+        margin-bottom: 12px;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: 600;
+      }
+      details p {
+        margin-top: 8px;
+        color: var(--muted);
+      }
+      /* Footer */
+      footer {
+        padding: 30px 0;
+        text-align: center;
+        color: #94a3b8;
+        font-size: 0.9rem;
+        border-top: 1px solid var(--border);
+      }
+      footer a {
+        color: var(--muted);
+        text-decoration: none;
+        margin: 0 8px;
+      }
+      footer a:hover {
+        text-decoration: underline;
+      }
+      /* Responsive grid columns */
+      @media (min-width: 600px) {
+        .steps {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .features {
+          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+        .trust {
+          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+        /* Hero layout */
+        header .container {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          text-align: left;
+        }
+        .hero-text {
+          flex: 1;
+          padding-right: 20px;
+        }
+        .hero-demo {
+          flex: 1;
+        }
+        #theme-toggle:hover {
+          transform: scale(1.1);
+        }
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <img src="logo.png" alt="ValutBot Logo" width="120" class="logo" />
-      <h1>ValutBot</h1>
-      <p>
-        Следи за курсами валют и криптовалют прямо в Telegram и получай
-        уведомления, когда цена достигнет нужного уровня.
-      </p>
-
-      <a class="btn" href="https://t.me/ValutAlertBot?start=f_site"
-        >Открыть в Telegram</a
+    <button
+      id="theme-toggle"
+      aria-label="Переключить тему"
+      style="
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        background: none;
+        border: none;
+        color: var(--text);
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 1000;
+        width: 40px;
+        height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      "
+    >
+      <!-- Иконка для тёмной темы (луна) -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="currentColor"
+        viewBox="0 0 16 16"
       >
+        <path
+          d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286"
+        />
+      </svg>
+    </button>
 
-      <div class="features">
-        <div class="card">🔔 Гибкие уведомления по курсу</div>
-        <div class="card">⭐ Premium с расширенными возможностями</div>
-        <div class="card">📈 Поддержка популярных валют и криптовалют</div>
+    <header>
+      <div class="container">
+        <div class="hero-text">
+          <a href="https://valutalertbot.github.io/">
+            <img src="logo.png" alt="Логотип ValutBot" class="logo" />
+          </a>
+          <h1>ValutBot</h1>
+          <p class="subtitle">
+            Следите за курсами валют и криптовалют прямо в Telegram. Настройте
+            нужный курс один раз — ValutBot сообщит, когда цена будет
+            достигнута. Без рекламы и лишних приложений.
+          </p>
+          <a href="https://t.me/ValutAlertBot?start=f_site" class="btn-cta"
+            >🚀 Открыть в Telegram</a
+          >
+          <p class="hero-currencies">
+            USD • EUR • BTC • ETH • TON • SOL • DOGE
+          </p>
+        </div>
+        <div class="hero-demo">
+          <div class="widget" id="widget1">
+            <p>📈 <strong>BTC/USDT</strong></p>
+            <p>Текущий курс: <span id="widget-price">119 842</span> USDT</p>
+            <p>🎯 Ваш уровень: 120 000 USDT</p>
+            <p class="status">Статус: Ожидание...</p>
+          </div>
+          <div class="widget hidden" id="widget2">
+            <p>🎉 <strong>Уведомление</strong></p>
+            <p>Bitcoin достиг <strong>120 000 USDT</strong></p>
+            <p>✔ Сообщение отправлено в Telegram</p>
+          </div>
+        </div>
       </div>
-    </div>
+    </header>
+
+    <main class="container">
+      <section id="how">
+        <h2 class="section-title">Как это работает</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Выберите пару</h3>
+            <p>Например: USD/RUB, BTC/USDT, TON/USD...</p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Укажите курс</h3>
+            <p>Например: BTC > 120 000 или USD > 95</p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Получите уведомление</h3>
+            <p>Например: «Bitcoin достиг 120 000 USDT»</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="features">
+        <h2 class="section-title">Возможности</h2>
+        <div class="features">
+          <div class="card">
+            <h3>🔔 Умные уведомления</h3>
+            <p>Получайте оповещения при достижении заданного курса.</p>
+          </div>
+          <div class="card">
+            <h3>💰 Валюты и криптовалюты</h3>
+            <p>
+              Поддерживаются основные валюты и криптовалюты Bitcoin, Ethereum и
+              другие.
+            </p>
+          </div>
+          <div class="card">
+            <h3>⚡ Обновление курсов</h3>
+            <p>
+              В бесплатной версии — обновления раз в час; Premium — каждую
+              минуту.
+            </p>
+          </div>
+          <div class="card">
+            <h3>🤖 Всё в Telegram</h3>
+            <p>
+              Не нужно устанавливать приложения — ValutBot работает прямо в
+              Telegram.
+            </p>
+          </div>
+          <div class="card">
+            <h3>🎯 Несколько уведомлений</h3>
+            <p>Можно отслеживать разные валюты одновременно.</p>
+          </div>
+          <div class="card">
+            <h3>⭐ Кастомные криптовалюты</h3>
+            <p>С Premium доступны любые токены (мемкоины, альты и т.д.).</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing">
+        <h2 class="section-title">Сравнение Free vs Premium</h2>
+        <table class="compare">
+          <tr>
+            <th>Функция</th>
+            <th>Бесплатно</th>
+            <th>Premium</th>
+          </tr>
+          <tr>
+            <td>Валютная пара</td>
+            <td>1 активная пара</td>
+            <td>Без ограничений</td>
+          </tr>
+          <tr>
+            <td>Доп. пары</td>
+            <td>+2 за подписку +1 за приглашение</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>Частота обновления</td>
+            <td>Каждый час</td>
+            <td>Каждую минуту</td>
+          </tr>
+          <tr>
+            <td>Поддержка активов</td>
+            <td>Основные валюты + топ крипто</td>
+            <td>Любые токены</td>
+          </tr>
+          <tr>
+            <td>Оповещения</td>
+            <td>Стандартные</td>
+            <td>Расширенные с графикой</td>
+          </tr>
+        </table>
+      </section>
+
+      <section id="supported">
+        <h2 class="section-title">Поддерживаемые активы</h2>
+        <div class="badges">
+          <span class="badge">USD</span>
+          <span class="badge">EUR</span>
+          <span class="badge">RUB</span>
+          <span class="badge">UAH</span>
+          <span class="badge">BYN</span>
+          <span class="badge">KZT</span>
+          <span class="badge">UZS</span>
+          <span class="badge">BTC</span>
+          <span class="badge">ETH</span>
+          <span class="badge">BNB</span>
+          <span class="badge">XRP</span>
+          <span class="badge">ADA</span>
+          <span class="badge">SOL</span>
+          <span class="badge">DOGE</span>
+          <span class="badge">TON</span>
+          <span class="badge">Любые токены</span>
+        </div>
+      </section>
+
+      <section id="why">
+        <h2 class="section-title">Почему ValutBot</h2>
+        <div class="trust">
+          <div class="card">
+            <h3>⚡ Telegram</h3>
+            <p>Работает прямо в Telegram — не нужно скачивать приложения.</p>
+          </div>
+          <div class="card">
+            <h3>🔒 Простота</h3>
+            <p>Настройте уведомление за секунды — ничего лишнего.</p>
+          </div>
+          <div class="card">
+            <h3>📊 Надёжные данные</h3>
+            <p>Источники: Binance, Bybit, Frankfurter (ECB).</p>
+          </div>
+          <div class="card">
+            <h3>⭐ Premium</h3>
+            <p>
+              Неограниченное количество подписок и обновление каждую минуту.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq">
+        <h2 class="section-title">FAQ</h2>
+        <details>
+          <summary>Как начать работу с ValutBot?</summary>
+          <p>Нажмите кнопку «Открыть в Telegram» и следуйте подсказкам бота.</p>
+        </details>
+        <details>
+          <summary>Какие активы поддерживаются?</summary>
+          <p>
+            Поддерживаются фиатные: USD, EUR, RUB, UAH, BYN, KZT, UZS, а также
+            криптовалюты Bitcoin, Ethereum, BNB, XRP, ADA, SOL, DOGE, TON и
+            другие. В Premium доступны любые токены.
+          </p>
+        </details>
+        <details>
+          <summary>Сколько уведомлений можно создавать?</summary>
+          <p>
+            В бесплатной версии доступна 1 активная подписка. При подписке на
+            канал Вы получите ещё 2 пары, а пригласив друга — +1. Premium даёт
+            неограниченные подписки.
+          </p>
+        </details>
+        <details>
+          <summary>Как часто обновляются курсы?</summary>
+          <p>В бесплатной версии — раз в час, с Premium — каждую минуту.</p>
+        </details>
+        <details>
+          <summary>Нужно ли что-то скачивать?</summary>
+          <p>
+            Нет. ValutBot полностью работает внутри Telegram и не требует
+            установки приложений.
+          </p>
+        </details>
+      </section>
+    </main>
+
+    <footer>
+      <div>
+        <a href="https://t.me/ValutAlertBot?start=f_site">Telegram</a> |
+        <a href="https://t.me/ValutAlertBotNews">Новости</a> |
+        <a href="https://valutalertbot.github.io/privacy">Privacy Policy</a> |
+        <a href="mailto:valutalertbot@gmail.com">Support</a>
+      </div>
+      <p>© 2026 ValutBot</p>
+    </footer>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "ValutBot",
+        "description": "Telegram-бот для отслеживания курсов валют и криптовалют с уведомлениями при достижении нужного уровня.",
+        "url": "https://valutalertbot.github.io/",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Telegram"
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Как начать работу с ValutBot?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Нажмите кнопку «Открыть в Telegram» и следуйте подсказкам бота."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Какие активы поддерживаются?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Поддерживаются фиатные: USD, EUR, RUB, UAH, BYN, KZT, UZS, а также криптовалюты Bitcoin, Ethereum, BNB, XRP, ADA, SOL, DOGE, TON и другие. В Premium доступны любые токены."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Сколько уведомлений можно создавать?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "В бесплатной версии доступна 1 активная подписка. При подписке на канал вы получите ещё 2 пары, а пригласив друга — +1. Premium даёт неограниченные подписки."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Как часто обновляются курсы?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "В бесплатной версии — раз в час, с Premium — каждую минуту."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Нужно ли что-то скачивать?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Нет. ValutBot полностью работает внутри Telegram и не требует установки приложений."
+            }
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "ValutBot",
+        "url": "https://valutalertbot.github.io/",
+        "logo": "https://valutalertbot.github.io/logo.png",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "valutalertbot@gmail.com"
+        }
+      }
+    </script>
+
+    <script>
+      // Переключатель темы
+      (function () {
+        const toggle = document.getElementById("theme-toggle");
+        const iconMoon =
+          '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286"/></svg>';
+        const iconSun =
+          '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/></svg>';
+        function setTheme(theme, theme_browser) {
+          document.documentElement.setAttribute("data-theme", theme);
+          localStorage.setItem("theme", theme);
+          localStorage.setItem("theme_browser", theme_browser);
+          toggle.innerHTML = theme === "light" ? iconMoon : iconSun;
+        }
+        function getTheme() {
+          const storedTheme = localStorage.getItem("theme");
+          const storedBrowserTheme = localStorage.getItem("theme_browser");
+          return [storedTheme, storedBrowserTheme];
+        }
+        // Инициализация темы
+
+        const prefersLight = window.matchMedia(
+          "(prefers-color-scheme: light)",
+        ).matches; // browser preference
+        last_theme = getTheme(); // [storedTheme, storedBrowserTheme]
+        if (last_theme[1] === (prefersLight ? "light" : "dark")) {
+          setTheme(last_theme[0], last_theme[1]);
+        } else {
+          setTheme(
+            prefersLight ? "light" : "dark",
+            prefersLight ? "light" : "dark",
+          );
+        }
+
+        toggle.addEventListener("click", () => {
+          const current = document.documentElement.getAttribute("data-theme");
+          setTheme(
+            current === "light" ? "dark" : "light",
+            prefersLight ? "light" : "dark",
+          );
+        });
+      })();
+
+      // Живой демонстрационный виджет
+      setTimeout(() => {
+        document.getElementById("widget1").classList.add("hidden");
+        document.getElementById("widget2").classList.remove("hidden");
+      }, 3000);
+    </script>
   </body>
 </html>
