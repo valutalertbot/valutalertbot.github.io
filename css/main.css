@@ -653,6 +653,40 @@ code {
   color: var(--text);
 }
 
+.asset-directory-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.asset-directory-card {
+  display: block;
+  min-height: 190px;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+
+.asset-directory-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.asset-directory-card span {
+  color: var(--accent-strong);
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.asset-directory-card h2 {
+  margin-top: 12px;
+}
+
+.asset-directory-card p {
+  margin-top: 8px;
+}
+
 .content-card ul,
 .content-card ol,
 .legal-content ul {
@@ -1096,6 +1130,7 @@ details p {
   .condition-grid,
   .capability-grid,
   .plan-grid,
+  .asset-directory-grid,
   .grid-2,
   .grid-3 {
     grid-template-columns: 1fr;

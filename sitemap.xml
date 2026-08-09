@@ -6,27 +6,32 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://valutbot.com/btc.html</loc>
+    <loc>https://valutbot.com/assets/</loc>
+    <lastmod>2026-08-09</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://valutbot.com/assets/btc.html</loc>
     <lastmod>2026-07-31</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://valutbot.com/gram.html</loc>
+    <loc>https://valutbot.com/assets/gram.html</loc>
     <lastmod>2026-07-31</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://valutbot.com/ethereum.html</loc>
+    <loc>https://valutbot.com/assets/eth.html</loc>
     <lastmod>2026-07-31</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://valutbot.com/usd.html</loc>
+    <loc>https://valutbot.com/assets/usd.html</loc>
     <lastmod>2026-07-31</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://valutbot.com/eur.html</loc>
+    <loc>https://valutbot.com/assets/eur.html</loc>
     <lastmod>2026-07-31</lastmod>
     <priority>0.8</priority>
   </url>
