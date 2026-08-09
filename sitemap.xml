@@ -11,37 +11,37 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://valutbot.com/assets/btc/</loc>
+    <loc>https://valutbot.com/assets/btc.html</loc>
     <lastmod>2026-08-09</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://valutbot.com/assets/gram/</loc>
+    <loc>https://valutbot.com/assets/gram.html</loc>
     <lastmod>2026-08-09</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://valutbot.com/assets/eth/</loc>
+    <loc>https://valutbot.com/assets/eth.html</loc>
     <lastmod>2026-08-09</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://valutbot.com/assets/usd/</loc>
+    <loc>https://valutbot.com/assets/usd.html</loc>
     <lastmod>2026-08-09</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://valutbot.com/assets/eur/</loc>
+    <loc>https://valutbot.com/assets/eur.html</loc>
     <lastmod>2026-08-09</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://valutbot.com/terms/</loc>
+    <loc>https://valutbot.com/terms.html</loc>
     <lastmod>2026-08-09</lastmod>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://valutbot.com/privacy/</loc>
+    <loc>https://valutbot.com/privacy.html</loc>
     <lastmod>2026-08-09</lastmod>
     <priority>0.3</priority>
   </url>

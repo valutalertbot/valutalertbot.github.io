@@ -2,12 +2,127 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="refresh" content="0; url=/assets/usd/" />
-    <link rel="canonical" href="https://valutbot.com/assets/usd/" />
-    <title>Страница перемещена | ValutBot</title>
-    <script src="/js/redirect.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ValutBot — уведомления о курсе доллара (USD) в Telegram</title>
+    <meta name="description" content="ValutBot — Telegram-бот для уведомлений о курсе доллара США. Настройте порог USD и получите сообщение при достижении курса." />
+    <meta property="og:title" content="ValutBot — уведомления о курсе доллара" />
+    <meta property="og:description" content="Следите за курсом USD через Telegram и получайте уведомления при достижении нужной цены." />
+    <meta property="og:image" content="https://valutbot.com/icons/logo.png" />
+    <meta property="og:url" content="https://valutbot.com/assets/usd.html" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://valutbot.com/assets/usd.html" />
+    <link rel="icon" href="/icons/favicon.png" />
+    <link rel="stylesheet" href="/css/main.css" />
   </head>
   <body>
-    <p>Страница перемещена: <a href="/assets/usd/">уведомления о курсе доллара США</a>.</p>
+    <div data-header></div>
+
+    <main>
+      <section class="asset-hero">
+        <div class="container hero-grid">
+          <div>
+            <p class="eyebrow">US Dollar · USD</p>
+            <h1>Уведомления о курсе доллара США</h1>
+            <p class="lead">ValutBot пришлет сообщение в Telegram, когда USD достигнет нужного вам уровня.</p>
+            <div class="hero-actions">
+              <a class="btn-cta" href="https://t.me/ValutAlertBot?start=usd_site" target="_blank" rel="noopener">Открыть бота</a>
+              <a class="btn-secondary" href="#faq">FAQ</a>
+            </div>
+          </div>
+
+          <div class="demo-card" data-demo-widget>
+            <div class="demo-screen">
+              <div class="demo-row"><span class="demo-label">Пара</span><strong>USD/RUB</strong></div>
+              <div class="demo-row"><span class="demo-label">Курс</span><strong class="demo-price"><span data-demo-price data-target-price="95.00">94.62</span> RUB</strong></div>
+              <div class="demo-row"><span class="demo-label">Условие</span><strong>USD выше 95.00</strong></div>
+              <div class="demo-row"><span class="demo-label">Статус</span><strong class="demo-status" data-demo-status>Ожидание курса</strong></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container grid grid-2">
+          <article class="content-card">
+            <h2>Не проверяйте курс вручную</h2>
+            <p>Когда вы ждёте выгодный курс для обмена, оплаты или перевода, не нужно постоянно заходить в банковское приложение. ValutBot запоминает вашу цель и сообщает, когда курс её достигнет.</p>
+          </article>
+          <article class="content-card">
+            <h2>Два способа настроить сигнал</h2>
+            <p>Укажите конкретную цену, выше или ниже которой вас нужно уведомить, либо процент изменения курса. Настройка проходит в Telegram в несколько понятных шагов.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container grid grid-2">
+          <article class="content-card">
+            <h2>Когда полезно уведомление по USD</h2>
+            <ul class="compact-list">
+              <li>когда вы ждете выгодный курс обмена USD/RUB, USD/KZT или USD/UAH;</li>
+              <li>перед оплатой зарубежных сервисов или переводом;</li>
+              <li>для контроля цены криптовалют в долларе: BTC/USD, ETH/USD, GRAM/USD;</li>
+              <li>при планировании покупки техники, подписок или поездок;</li>
+              <li>для отслеживания обратных пар вроде EUR/USD.</li>
+            </ul>
+          </article>
+          <article class="content-card">
+            <h2>Банк и бот решают разные задачи</h2>
+            <p>В банке вы видите курс и совершаете обмен. ValutBot дополняет банк: он ждёт за вас и отправляет сигнал, чтобы вам не приходилось помнить о проверке.</p>
+            <p>Бот не даёт финансовых рекомендаций и не совершает операции от вашего имени.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <h2 class="section-title">Как это работает</h2>
+          <div class="grid grid-3">
+            <article class="step"><span class="step-number">1</span><h3>Выберите USD-пару</h3><p>Например, USD/RUB или EUR/USD.</p></article>
+            <article class="step"><span class="step-number">2</span><h3>Задайте условие</h3><p>Укажите цену или процент изменения.</p></article>
+            <article class="step"><span class="step-number">3</span><h3>Получите сообщение</h3><p>Бот отправит сигнал в Telegram.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container grid grid-3">
+          <article class="feature-card"><h3>Рост и падение</h3><p>Настраивайте целевую цену в нужную сторону.</p></article>
+          <article class="feature-card"><h3>Без лишних приложений</h3><p>Все действия и уведомления доступны в Telegram.</p></article>
+          <article class="feature-card"><h3>Условия можно менять</h3><p>Поменялись планы - отредактируйте цену или процент, не создавая всё заново.</p></article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container content-card asset-links">
+          <h2>Другие активы</h2>
+          <p>Также доступны уведомления о курсе <a href="/assets/eur.html">EUR</a>, <a href="/assets/btc.html">BTC</a>, <a href="/assets/gram.html">GRAM</a> и <a href="/assets/eth.html">ETH</a>.</p>
+        </div>
+      </section>
+
+      <section id="faq" class="section">
+        <div class="container">
+          <h2 class="section-title">FAQ</h2>
+          <div class="faq-list faq-list--accordion">
+            <details name="faq" open><summary>Как создать уведомление о курсе доллара?</summary><p>Откройте @ValutAlertBot, выберите валюты, USD и вторую валюту пары. Затем укажите цену или процент изменения.</p></details>
+            <details name="faq"><summary>Какие пары с долларом доступны?</summary><p>USD можно отслеживать к EUR, RUB, UAH, BYN, KZT и UZS. Любую криптовалюту тоже можно отслеживать к доллару, например BTC/USD, ETH/USD или GRAM/USD.</p></details>
+            <details name="faq"><summary>Сколько уведомлений можно добавить?</summary><p>В бесплатной версии доступна 1 активная подписка. Лимит можно увеличить бонусами или включить Premium до 1000 пар.</p></details>
+            <details name="faq"><summary>Можно ли получать уведомления о падении USD?</summary><p>Да. Логика подписки поддерживает условия по цене и проценту изменения, поэтому можно отслеживать как рост, так и снижение.</p></details>
+          </div>
+        </div>
+      </section>
+
+      <section class="final-cta">
+        <div class="container final-cta-inner">
+          <div><p class="section-kicker">USD под контролем</p><h2>Дождитесь нужного курса без ручных проверок.</h2><p>Укажите цену или процент изменения прямо в Telegram.</p></div>
+          <a class="btn-cta btn-cta-light" href="https://t.me/ValutAlertBot?start=usd_site" target="_blank" rel="noopener">Создать условие</a>
+        </div>
+      </section>
+    </main>
+
+    <div data-footer></div>
+    <script src="/js/theme.js"></script>
+    <script src="/js/main.js"></script>
   </body>
 </html>
