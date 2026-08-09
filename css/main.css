@@ -884,6 +884,25 @@ details p {
   font-weight: 750;
 }
 
+.not-found {
+  display: grid;
+  min-height: calc(100vh - 260px);
+  place-items: center;
+}
+
+.not-found .section {
+  width: 100%;
+}
+
+.not-found-content {
+  max-width: 760px;
+  padding: 42px 0;
+}
+
+.not-found-content h1 {
+  max-width: 680px;
+}
+
 .final-cta {
   border-top: 1px solid var(--border);
   background: #1b2a30;
