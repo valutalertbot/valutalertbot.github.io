@@ -367,6 +367,16 @@ h1 {
   text-align: right;
 }
 
+.panel-note {
+  margin: 16px 0 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--surface-soft);
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
 .demo-card {
   padding: 24px;
 }
