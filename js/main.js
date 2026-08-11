@@ -116,6 +116,68 @@
     window.addEventListener("scroll", updateHeader, { passive: true });
   }
 
+  function cleanTelegramPayloadPart(value) {
+    return String(value || "").replace(/[^A-Za-z0-9_-]/g, "");
+  }
+
+  function getPostHogDistinctId() {
+    if (!window.posthog?.__loaded || typeof window.posthog.get_distinct_id !== "function") {
+      return "";
+    }
+
+    return cleanTelegramPayloadPart(window.posthog.get_distinct_id());
+  }
+
+  function updateTelegramLink(link) {
+    const data = cleanTelegramPayloadPart(link.dataset.telegramStart).slice(0, 20);
+    const distinctId = getPostHogDistinctId();
+
+    if (!data || !distinctId) {
+      return false;
+    }
+
+    // Telegram accepts deep-link payloads up to 64 characters.
+    const maxIdLength = 64 - `site__${data}`.length;
+    const startPayload = `site_${distinctId.slice(0, maxIdLength)}_${data}`;
+
+    link.href = `https://t.me/ValutAlertBot?start=${startPayload}`;
+    return true;
+  }
+
+  function initTelegramLinks() {
+    const links = document.querySelectorAll("[data-telegram-start]");
+
+    if (!links.length) {
+      return;
+    }
+
+    links.forEach((link) => {
+      link.addEventListener("click", () => updateTelegramLink(link));
+    });
+
+    const updateAll = () => {
+      let updated = false;
+
+      links.forEach((link) => {
+        updated = updateTelegramLink(link) || updated;
+      });
+
+      return updated;
+    };
+
+    if (updateAll()) {
+      return;
+    }
+
+    const retryTimer = window.setInterval(() => {
+      if (updateAll()) {
+        window.clearInterval(retryTimer);
+      }
+    }, 100);
+
+    window.setTimeout(() => window.clearInterval(retryTimer), 5000);
+  }
+
   async function init() {
     try {
       await Promise.all([
@@ -136,6 +198,7 @@
     initDemoWidgets();
     initConditionPanels();
     initCompactHeader();
+    initTelegramLinks();
   }
 
   if (document.readyState === "loading") {
