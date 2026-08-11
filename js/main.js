@@ -128,17 +128,35 @@
     return cleanTelegramPayloadPart(window.posthog.get_distinct_id());
   }
 
+  function getCurrentPageData() {
+    const pageData = {
+      "/assets/btc.html": "btc",
+      "/assets/eth.html": "eth",
+      "/assets/eur.html": "eur",
+      "/assets/gram.html": "gram",
+      "/assets/usd.html": "usd",
+    };
+
+    return pageData[window.location.pathname] || "";
+  }
+
   function updateTelegramLink(link) {
-    const data = cleanTelegramPayloadPart(link.dataset.telegramStart).slice(0, 20);
+    const configuredData = link.dataset.telegramStart === "current"
+      ? getCurrentPageData()
+      : link.dataset.telegramStart;
+    const data = cleanTelegramPayloadPart(configuredData).slice(0, 20);
     const distinctId = getPostHogDistinctId();
 
-    if (!data || !distinctId) {
+    if (!distinctId) {
       return false;
     }
 
     // Telegram accepts deep-link payloads up to 64 characters.
-    const maxIdLength = 64 - `site__${data}`.length;
-    const startPayload = `site_${distinctId.slice(0, maxIdLength)}_${data}`;
+    const prefixLength = data ? `site__${data}`.length : "site_".length;
+    const maxIdLength = 64 - prefixLength;
+    const startPayload = data
+      ? `site_${distinctId.slice(0, maxIdLength)}_${data}`
+      : `site_${distinctId.slice(0, maxIdLength)}`;
 
     link.href = `https://t.me/ValutAlertBot?start=${startPayload}`;
     return true;
