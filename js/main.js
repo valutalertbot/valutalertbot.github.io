@@ -137,28 +137,84 @@
       "/assets/usd.html": "usd",
     };
 
-    return pageData[window.location.pathname] || "";
+    return pageData[window.location.pathname] || "direct";
   }
 
-  function updateTelegramLink(link) {
+  function createTelegramBridgeId() {
+    const storageKey = "valutbot_telegram_bridge_id";
+    let stored = "";
+    try {
+      stored = cleanTelegramPayloadPart(localStorage.getItem(storageKey));
+    } catch (_error) {
+      // Privacy modes may deny storage; the current click can still proceed.
+    }
+
+    if (stored) {
+      return stored;
+    }
+
+    const randomPart = window.crypto?.randomUUID
+      ? window.crypto.randomUUID().replace(/-/g, "")
+      : `${Date.now()}${Math.random().toString(36).slice(2)}`;
+    const bridgeId = `web_${cleanTelegramPayloadPart(randomPart).slice(0, 32)}`;
+    try {
+      localStorage.setItem(storageKey, bridgeId);
+    } catch (_error) {
+      // The ID is still valid for this navigation even without persistence.
+    }
+    return bridgeId;
+  }
+
+  function fitPostHogIdForTelegram(distinctId, maxLength) {
+    if (distinctId.length <= maxLength) {
+      return distinctId;
+    }
+
+    // Telegram allows only 64 characters in a start payload. Truncating the
+    // PostHog ID creates a different person, so identify the current visitor
+    // with a stable compact ID and pass that exact ID to the bot instead.
+    const bridgeId = createTelegramBridgeId();
+    window.posthog.identify(bridgeId, {}, {
+      telegram_bridge_created: true,
+    });
+    return bridgeId;
+  }
+
+  function getTelegramSource(link) {
     const configuredData = link.dataset.telegramStart === "current"
       ? getCurrentPageData()
       : link.dataset.telegramStart;
-    const data = cleanTelegramPayloadPart(configuredData).slice(0, 20);
-    const distinctId = getPostHogDistinctId();
+    const possibleSource = cleanTelegramPayloadPart(configuredData).toLowerCase();
+    const supportedSources = new Set(["direct", "usd", "eur", "btc", "eth", "gram"]);
 
-    if (!distinctId) {
+    return supportedSources.has(possibleSource) ? possibleSource : "direct";
+  }
+
+  function updateTelegramLink(link, trackClick = false) {
+    const source = getTelegramSource(link);
+    const browserDistinctId = getPostHogDistinctId();
+
+    link.href = `https://t.me/ValutAlertBot?start=site_${source}`;
+
+    if (!browserDistinctId) {
       return false;
     }
 
     // Telegram accepts deep-link payloads up to 64 characters.
-    const prefixLength = data ? `site__${data}`.length : "site_".length;
-    const maxIdLength = 64 - prefixLength;
-    const startPayload = data
-      ? `site_${distinctId.slice(0, maxIdLength)}_${data}`
-      : `site_${distinctId.slice(0, maxIdLength)}`;
+    const fixedLength = `site_${source}_`.length;
+    const maxIdLength = 64 - fixedLength;
+    const distinctId = fitPostHogIdForTelegram(browserDistinctId, maxIdLength);
+    const startPayload = `site_${source}_${distinctId}`;
 
     link.href = `https://t.me/ValutAlertBot?start=${startPayload}`;
+
+    if (trackClick) {
+      window.posthog.capture("telegram_bot_link_opened", {
+        source,
+        telegram_distinct_id: distinctId,
+      });
+    }
+
     return true;
   }
 
@@ -170,7 +226,7 @@
     }
 
     links.forEach((link) => {
-      link.addEventListener("click", () => updateTelegramLink(link));
+      link.addEventListener("click", () => updateTelegramLink(link, true));
     });
 
     const updateAll = () => {
